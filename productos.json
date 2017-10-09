@@ -1,0 +1,29 @@
+{"productos":[{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"cucharas.jpeg"},{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas1.jpeg"},{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas2.jpeg"}]}
+let mock: Object = {
+    'productos' : [
+        {
+            'nombre' : 'estufa',
+            'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
+            'beneficios' : 'Es muy buena',
+            'habilitado' : true,
+            'imagen' : 'cucharas.jpeg'
+        },
+        {
+            'nombre' : 'estufa',
+            'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
+            'beneficios' : 'Es muy buena',
+            'habilitado' : true,
+            'imagen' : 'ollas1.jpeg'
+        },
+        {
+            'nombre' : 'estufa',
+            'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
+            'beneficios' : 'Es muy buena',
+            'habilitado' : true,
+            'imagen' : 'ollas2.jpeg'
+        }
+    ]
+
+};
+
+console.log(JSON.stringify(mock));
