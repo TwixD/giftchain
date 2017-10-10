@@ -27,19 +27,20 @@ export class GiftSlider {
         this.firebaseAppService.query('/productos', 'habilitado', true).then((data) => {
             if (data) {
                 for (let key in data) {
-                    if (this.imageProp in data[key]) {
-                        let fileName: string = data[key][this.imageProp];
+                    let product = Object.assign({}, data[key]);
+                    if (this.imageProp in product) {
+                        let fileName: string = product[this.imageProp];
                         this.firebaseAppService.getStorageFileUrl(fileName).then((fileURL) => {
-                            this.fileTransfer.download(fileURL, this.file.dataDirectory + fileName).then((entry) => {
-                                console.log('download complete: ' + entry.toURL());
-                            }, (error) => {
-                                console.log(error);
-                            });
-                            console.log(fileURL);
+                            product['imgUrl'] = fileURL;
+                            /*                            this.fileTransfer.download(fileURL, this.file.dataDirectory + fileName).then((entry) => {
+                                                            console.log('download complete: ' + entry.toURL());
+                                                        }, (error) => {
+                                                            console.log(error);
+                                                        });*/
                         });
                     }
+                    this.products.push(product);
                 }
-                this.products = data;
             }
         });
     }

@@ -1,5 +1,4 @@
-<ion-slides loop="true">
-    <ion-slide *ngFor="let product of products">
-        <h2>{{ product['nombre'] }}</h2>
-    </ion-slide>
+<ion-slides loop="true" pager="false" effect="cube" no-margin no-padding>
+    <slide-product *ngFor="let product of products" [product]="product">
+    </slide-product>
 </ion-slides>

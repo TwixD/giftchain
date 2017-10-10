@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { phoneFormatter } from '../directives/phone.directive';
 
+import { productSlide } from '../components/product-slider.component';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -38,7 +39,8 @@ export const firebaseConfig = {
     HomePage,
     Login,
     GiftSlider,
-    phoneFormatter
+    phoneFormatter,
+    productSlide
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     Login,
-    GiftSlider
+    GiftSlider,
+    productSlide
   ],
   providers: [
     StatusBar,
