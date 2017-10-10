@@ -1,4 +1,4 @@
-<ion-slides loop="true" pager="false" effect="cube" no-margin no-padding>
-    <slide-product *ngFor="let product of products" [product]="product">
+<ion-slides loop="false" pager="true" effect="coverflow" no-margin no-padding>
+    <slide-product *ngFor="let product of products" [product]="product" (eventHandler)="eventHandler($event)">
     </slide-product>
 </ion-slides>

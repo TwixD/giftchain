@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { GiftSlider } from '../pages/gift-slider/gift-slider';
+import { GiftChoice } from '../pages/gift-choice/gift-choice';
 
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
 
@@ -39,6 +40,7 @@ export const firebaseConfig = {
     HomePage,
     Login,
     GiftSlider,
+    GiftChoice,
     phoneFormatter,
     productSlide
   ],
@@ -55,6 +57,7 @@ export const firebaseConfig = {
     HomePage,
     Login,
     GiftSlider,
+    GiftChoice,
     productSlide
   ],
   providers: [

@@ -85,4 +85,6 @@
     <plugin name="cordova-plugin-firebase" spec="^0.1.24" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
+    <engine name="android" spec="~6.2.3" />
+    <allow-navigation href="http://192.168.5.112:8100" />
 </widget>
