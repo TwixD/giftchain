@@ -7,8 +7,14 @@ import { NavParams } from 'ionic-angular';
 })
 export class GiftChoice {
 
+    product: Object;
+
     constructor(params: NavParams) {
-        console.log(params);
+        this.product = params.get('product');
+    }
+
+    ngOnInit() {
+        console.log(this.product);
     }
 
 }

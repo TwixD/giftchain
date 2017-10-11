@@ -3,7 +3,7 @@ import { FirebaseAppService } from '../../providers/firebase/firebase.service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Slides, AlertController, NavParams, NavController } from 'ionic-angular';
-import {  GiftChoice } from '../gift-choice/gift-choice';
+import { GiftChoice } from '../gift-choice/gift-choice';
 
 @Component({
     selector: 'gift-slider',
@@ -72,7 +72,10 @@ export class GiftSlider {
                         {
                             text: 'Si',
                             handler: data => {
-                                this.navCtrl.push( GiftChoice, event['product']);
+                                let param: Object = {
+                                    'product': event['product']
+                                };
+                                this.navCtrl.push( GiftChoice, param);
                             }
                         }
                     ]

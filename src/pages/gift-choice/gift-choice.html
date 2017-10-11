@@ -1,0 +1,16 @@
+<div class="img-div" *ngIf="product">
+    <img class="product-image" src="{{ product['imgUrl'] }}" />
+</div>
+<h1 class="product-name" *ngIf="product">{{ product['nombre'] }}</h1>
+<ion-item>
+    <ion-label stacked>Dueño de la Lista</ion-label>
+    <ion-input type="text"></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label stacked>Fecha de Inicio</ion-label>
+    <ion-input type="text" value="10 Agosto, 1992" readonly="true"></ion-input>
+</ion-item>
+<ion-item>
+    <ion-label stacked>Fecha Final del Programa</ion-label>
+    <ion-input type="text" value="10 Agosto, 1992" readonly="true"></ion-input>
+</ion-item>
