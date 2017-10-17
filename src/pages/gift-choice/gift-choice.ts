@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, AlertController } from 'ionic-angular';
+import { GiftContacts } from '../gift-contacts/gift-contacts';
 import * as moment from 'moment-timezone';
 
 @Component({
@@ -14,7 +15,7 @@ export class GiftChoice {
         'telefono': null,
     };
 
-    constructor(params: NavParams,
+    constructor(public params: NavParams,
         public navCtrl: NavController,
         public alertCtrl: AlertController) {
         this.user = params.get('user') || this.user;
@@ -48,7 +49,7 @@ export class GiftChoice {
                 {
                     text: 'Si',
                     handler: data => {
-                        console.log(data);
+                        this.navCtrl.push(GiftContacts, this.params.data);
                     }
                 }
             ]

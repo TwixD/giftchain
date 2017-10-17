@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { GiftSlider } from '../pages/gift-slider/gift-slider';
+import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,8 @@ export class MyApp {
   }
 
   route(){
-    this.rootPage = Login;
+    // this.rootPage = Login;
+    this.rootPage = GiftContacts;
   }
 
 }

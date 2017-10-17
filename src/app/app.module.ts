@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { GiftSlider } from '../pages/gift-slider/gift-slider';
 import { GiftChoice } from '../pages/gift-choice/gift-choice';
+import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
 
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
 
@@ -25,8 +26,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { Sim } from '@ionic-native/sim';
-
-
+import { Contacts } from '@ionic-native/contacts';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCNTMkTS5rKwrteoOAH6zqaA5iCCw5FtLE",
@@ -43,6 +43,7 @@ export const firebaseConfig = {
     Login,
     GiftSlider,
     GiftChoice,
+    GiftContacts,
     phoneFormatter,
     productSlide
   ],
@@ -60,6 +61,7 @@ export const firebaseConfig = {
     Login,
     GiftSlider,
     GiftChoice,
+    GiftContacts,
     productSlide
   ],
   providers: [
@@ -71,6 +73,7 @@ export const firebaseConfig = {
     FileTransfer,
     NativeStorage,
     Sim,
+    Contacts,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
