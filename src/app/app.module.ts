@@ -23,6 +23,8 @@ import { productSlide } from '../components/product-slider.component';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { Sim } from '@ionic-native/sim';
 
 
 
@@ -67,6 +69,8 @@ export const firebaseConfig = {
     FirebaseAppService,
     File,
     FileTransfer,
+    NativeStorage,
+    Sim,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

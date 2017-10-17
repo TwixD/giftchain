@@ -10,9 +10,9 @@
         <p text-center ion-text>Preparate para regalar y ganar millones de regalos!</p>
         <ion-item>
             <ion-label stacked>Teléfono</ion-label>
-            <ion-input phoneFormatter type="tel" placeholder="(123) 456 789 1011" max="13"></ion-input>
+            <ion-input phoneFormatter [(ngModel)]="phone" type="tel" placeholder="(123) 456 789 1011" max="13"></ion-input>
         </ion-item>
-        <button ion-button block>Vamos!</button>
+        <button ion-button block (click)="goTo()">Vamos!</button>
     </div>
 </ion-content>
   

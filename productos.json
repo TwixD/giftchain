@@ -1,29 +1,41 @@
-{"productos":[{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"cucharas.jpeg"},{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas1.jpeg"},{"nombre":"estufa","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas2.jpeg"}]}
+{"productos":[{"nombre":"Set de cucharas","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"cucharas.jpeg"},{"nombre":"Ollas buenas","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas1.jpeg"},{"nombre":"Ollas refact","caracteristicas":"Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)","beneficios":"Es muy buena","habilitado":true,"imagen":"ollas2.jpeg"}],"usuarios":[{"nombre":"Juan David Castaño","telefono":"3163875938","email":"jdcastano@opalo.com.co"},{"nombre":"Alexxis Tello","telefono":"29938192333","email":"alexxis@opalo.com.co"}]}
 let mock: Object = {
     'productos' : [
         {
-            'nombre' : 'estufa',
+            'nombre' : 'Set de cucharas',
             'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
             'beneficios' : 'Es muy buena',
             'habilitado' : true,
             'imagen' : 'cucharas.jpeg'
         },
         {
-            'nombre' : 'estufa',
+            'nombre' : 'Ollas buenas',
             'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
             'beneficios' : 'Es muy buena',
             'habilitado' : true,
             'imagen' : 'ollas1.jpeg'
         },
         {
-            'nombre' : 'estufa',
+            'nombre' : 'Ollas refact',
             'caracteristicas' : 'Gabinete despensa - 52cm x 92.5cm x 48.5cm (Ancho x Alto x Fondo)',
             'beneficios' : 'Es muy buena',
             'habilitado' : true,
             'imagen' : 'ollas2.jpeg'
         }
+    ],
+    'usuarios' : [
+        {
+            'nombre': 'Juan David Castaño',
+            'telefono': '3163875938',
+            'email': 'jdcastano@opalo.com.co'
+        },
+        {
+            'nombre': 'Alexxis Tello',
+            'telefono': '29938192333',
+            'email': 'alexxis@opalo.com.co'
+        }
     ]
-
 };
 
 console.log(JSON.stringify(mock));
+

@@ -22,34 +22,11 @@ export class GiftSlider {
         public transfer: FileTransfer,
         public file: File,
         public alertCtrl: AlertController) {
+        this.products = this.params.get('products');
     }
 
     ngOnInit() {
         this.fileTransfer = this.transfer.create();
-        this.loadProducts();
-    }
-
-    loadProducts() {
-        this.firebaseAppService.query('/productos', 'habilitado', true).then((data) => {
-            if (data) {
-                for (let key in data) {
-                    let product = Object.assign({}, data[key]);
-                    if (this.imageProp in product) {
-                        let fileName: string = product[this.imageProp];
-                        this.firebaseAppService.getStorageFileUrl(fileName).then((fileURL) => {
-                            product['imgUrl'] = fileURL;
-                            /*                            this.fileTransfer.download(fileURL, this.file.dataDirectory + fileName).then((entry) => {
-                                                            console.log('download complete: ' + entry.toURL());
-                                                        }, (error) => {
-                                                            console.log(error);
-                                                        });*/
-                        });
-                    }
-                    this.products.push(product);
-                }
-            }
-            console.log(this.products);
-        });
     }
 
     eventHandler(event: Object) {
@@ -72,10 +49,9 @@ export class GiftSlider {
                         {
                             text: 'Si',
                             handler: data => {
-                                let param: Object = {
-                                    'product': event['product']
-                                };
-                                this.navCtrl.push( GiftChoice, param);
+                                this.params.data['product'] = event['product'];
+                                console.log(this.params.data);
+                                this.navCtrl.push( GiftChoice, this.params.data);
                             }
                         }
                     ]

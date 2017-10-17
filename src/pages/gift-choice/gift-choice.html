@@ -4,13 +4,19 @@
 <h1 class="product-name" *ngIf="product">{{ product['nombre'] }}</h1>
 <ion-item>
     <ion-label stacked>Dueño de la Lista</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="user['nombre']" type="text"></ion-input>
 </ion-item>
 <ion-item>
     <ion-label stacked>Fecha de Inicio</ion-label>
-    <ion-input type="text" value="10 Agosto, 1992" readonly="true"></ion-input>
+    <ion-input [(ngModel)]="user['fecha_comienzo_format']" type="text" readonly="true"></ion-input>
 </ion-item>
 <ion-item>
     <ion-label stacked>Fecha Final del Programa</ion-label>
-    <ion-input type="text" value="10 Agosto, 1992" readonly="true"></ion-input>
+    <ion-input [(ngModel)]="user['fecha_fin_format']" type="text" readonly="true"></ion-input>
 </ion-item>
+<ion-fab left bottom>
+    <button ion-fab color="primary" (click)="back()"><ion-icon name="arrow-round-back"></ion-icon></button>
+</ion-fab>
+<ion-fab right bottom>
+    <button ion-fab color="primary" (click)="accept()"><ion-icon name="arrow-round-forward"></ion-icon></button>
+</ion-fab>
