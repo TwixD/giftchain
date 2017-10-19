@@ -26,7 +26,7 @@ export class MyApp {
   }
 
   route(){
-    // this.rootPage = Login;
+    //this.rootPage = Login;
     this.rootPage = GiftContacts;
   }
 

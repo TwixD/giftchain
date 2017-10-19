@@ -11,7 +11,7 @@ import { GiftSlider } from '../gift-slider/gift-slider';
 })
 export class Login {
 
-    phone: string = '3163875938';
+    phone: string;
     imageProp: string = 'imagen';
     products: Array<Object> = [];
     navParamsData: Object = {};
