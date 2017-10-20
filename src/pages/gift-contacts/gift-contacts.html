@@ -1,4 +1,4 @@
-<ion-content>
+<ion-header>
     <ion-card>
         <ion-card-content no-padding>
             <ion-grid>
@@ -21,12 +21,23 @@
             </ion-grid>
         </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-list>
-            <ion-item *ngFor="let contact of contactList">
-                <h2>{{ contact['displayName'] }}</h2>
-                <h3>{{ getNumber(contact) }}</h3>
-            </ion-item>
-        </ion-list>
-    </ion-card>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="termOfSearch" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+            placeholder="Buscar">
+        </ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let contact of contactList" (tap)="tapEvent(contact)" [class.selected]="contact['selected']">
+            <ion-avatar item-start>
+                <ion-icon name="contact" class="contact-img"></ion-icon>
+            </ion-avatar>
+            <h2>{{ contact['displayName'] }}</h2>
+            <h3>
+                <ion-icon name="call" color="primary"></ion-icon> {{ getNumber(contact) }}</h3>
+            <ion-icon *ngIf="!contact['selected']" name="add-circle" item-right></ion-icon>
+            <ion-icon *ngIf="contact['selected']" name="remove-circle" item-right></ion-icon>
+        </ion-item>
+    </ion-list>
 </ion-content>
