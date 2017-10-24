@@ -1,10 +1,11 @@
 import { Component, Input, Output, ElementRef, ViewChild, Renderer, EventEmitter } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 @Component({
     selector: 'slide-product',
     template: `
         <ion-slide no-margin>
-            <img class="product-image" src="{{ product['imgUrl'] }}" (click)="emit('selected')"/>
+            <img class="product-image" src="{{ getImageURL(product) }}" (click)="emit('selected')"/>
             <h1 class="product-name">{{ product['nombre'] }}</h1>
             <ion-grid no-margin no-padding>
                 <ion-row no-margin no-padding>
@@ -81,11 +82,12 @@ export class productSlide {
     @ViewChild('characteristics') characteristicsElement: ElementRef;
     @ViewChild('benefits') benefitsElement: ElementRef;
 
-    constructor(public renderer: Renderer) {
+    constructor(public renderer: Renderer,
+        public platform: Platform) {
+
     }
 
     ngOnInit() {
-        console.log(this.product);
     }
 
     ngAfterViewInit() {
@@ -101,6 +103,11 @@ export class productSlide {
 
     emit(ev: string) {
         this.eventHandler.emit({ 'event': ev, 'product': this.product });
+    }
+
+    getImageURL(product: Object) {
+        return this.platform.is('core') ?
+            product['imgUrl'] : (product['imgUrlLocal'] || product['imgUrl']);
     }
 
 }

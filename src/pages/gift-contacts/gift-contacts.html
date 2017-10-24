@@ -1,17 +1,17 @@
 <ion-header>
-    <ion-card>
+    <ion-card class="header-card">
         <ion-card-content no-padding>
             <ion-grid>
-                <ion-row>
+                <ion-row *ngIf="user">
                     <ion-col col-9>
                         <ion-row>
-                            Juan David Castaño
+                            {{ user['nombre'] }}
                         </ion-row>
                         <ion-row>
-                            Fecha inicio: 109/292/2981
+                            {{ user['fecha_comienzo_format'] }}
                         </ion-row>
                         <ion-row>
-                            Fecha inicio: 109/292/2981
+                            {{ user['fecha_fin_format'] }}
                         </ion-row>
                     </ion-col>
                     <ion-col col-3 class="product-img">
@@ -21,7 +21,7 @@
             </ion-grid>
         </ion-card-content>
     </ion-card>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-searchbar [(ngModel)]="termOfSearch" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
             placeholder="Buscar">
         </ion-searchbar>
@@ -29,15 +29,18 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let contact of contactList" (tap)="tapEvent(contact)" [class.selected]="contact['selected']">
-            <ion-avatar item-start>
+        <ion-item *ngFor="let contact of contactList" [class.selected]="contact['selected']">
+            <ion-avatar item-start (tap)="tapEvent(contact)">
                 <ion-icon name="contact" class="contact-img"></ion-icon>
             </ion-avatar>
-            <h2>{{ contact['displayName'] }}</h2>
-            <h3>
-                <ion-icon name="call" color="primary"></ion-icon> {{ getNumber(contact) }}</h3>
-            <ion-icon *ngIf="!contact['selected']" name="add-circle" item-right></ion-icon>
-            <ion-icon *ngIf="contact['selected']" name="remove-circle" item-right></ion-icon>
+            <h2 (tap)="tapEvent(contact)" style="font-weight: bold;">{{ contact['displayName'] }}</h2>
+            <h3 (tap)="changePhone(contact)">
+                <ion-icon name="call" color="primary"></ion-icon> {{ contact['phone'] || 'Sin número' }}</h3>
+            <ion-icon *ngIf="!contact['selected']" name="add-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
+            <ion-icon *ngIf="contact['selected']" name="remove-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
         </ion-item>
     </ion-list>
+    <ion-fab top right edge>
+        <button ion-fab mini style="font-size: 2.2rem;font-weight: bold;">{{ selectedContactsCounter }}</button>
+    </ion-fab>
 </ion-content>

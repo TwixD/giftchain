@@ -23,6 +23,7 @@ export class GiftSlider {
         public file: File,
         public alertCtrl: AlertController) {
         this.products = this.params.get('products');
+        console.log(this.products);
     }
 
     ngOnInit() {

@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { Sim } from '@ionic-native/sim';
 import { AlertController, NavController } from 'ionic-angular';
 import { FirebaseAppService } from '../../providers/firebase/firebase.service';
 import { GiftSlider } from '../gift-slider/gift-slider';
+import { User } from '../../models/user.model';
 
 @Component({
     selector: 'login-page',
@@ -20,7 +23,9 @@ export class Login {
         public sim: Sim,
         public firebaseAppService: FirebaseAppService,
         public alertCtrl: AlertController,
-        public navCtrl: NavController) {            
+        public navCtrl: NavController,
+        public transfer: FileTransfer,
+        public file: File) {
     }
 
     ngOnInit() {
@@ -55,17 +60,24 @@ export class Login {
                         let fileName: string = product[this.imageProp];
                         this.firebaseAppService.getStorageFileUrl(fileName).then((fileURL) => {
                             product['imgUrl'] = fileURL;
-                            /*                            this.fileTransfer.download(fileURL, this.file.dataDirectory + fileName).then((entry) => {
-                                                            console.log('download complete: ' + entry.toURL());
-                                                        }, (error) => {
-                                                            console.log(error);
-                                                        });*/
+                            this.loadProductImage(product);
                         });
                     }
                     this.products.push(product);
                 }
             }
             this.navParamsData['products'] = this.products;
+        });
+    }
+
+    loadProductImage(product: Object): Promise<boolean> {
+        return new Promise((resolve) => {
+            const fileTransfer: FileTransferObject = this.transfer.create();
+            fileTransfer.download(product['imgUrl'], `${this.file.dataDirectory}${product['imagen']}`).then((entry) => {
+                product['imgUrlLocal'] = entry.toURL();
+            }, (error) => {
+                console.error(error);
+            });
         });
     }
 
@@ -85,7 +97,12 @@ export class Login {
     goTo(): void {
         if (this.phone) {
             this.firebaseAppService.query('/usuarios', 'telefono', this.phone).then((data) => {
-                this.navParamsData['user'] = data.length > 0 ? data[0] : null;
+                let user: User = {
+                    'nombre': null,
+                    'telefono': this.phone,
+                    'email': null
+                };
+                this.navParamsData['user'] = data.length > 0 ? data[0] : user;
                 this.navCtrl.push(GiftSlider, this.navParamsData);
             });
         } else {

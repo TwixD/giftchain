@@ -8,7 +8,6 @@ export class FirebaseAppService {
 
     constructor(public db: AngularFireDatabase,
         public afAuth: AngularFireAuth) {
-
     }
 
     query(url: string, prop: string, equalValue: any): Promise<any> {
@@ -43,6 +42,20 @@ export class FirebaseAppService {
                 console.error(`[FirebaseService] [getStorageFileUrl]`, error);
                 resolve(null);
             }
+        });
+    }
+
+    insert(url: string, data: Object, createID: boolean = true): Promise<boolean> {
+        return new Promise((resolve) => {
+            let route: string = url + (createID ? `/${this.db.createPushId()}` : '');
+            const itemRef = this.db.object(route);
+            itemRef.set(data).then((res) => {
+                console.log(res);
+                resolve(true);
+            }).catch((error) => {
+                console.error(error);
+                resolve(false);
+            });
         });
     }
 

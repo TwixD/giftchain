@@ -18,5 +18,13 @@ gift-contacts{
         border-left: 7px solid #69BB7B;
         height: 100%;
     }
+    .header-card{
+        background-color: map-get($colors, primary);
+        color: white;
+        font-weight: bold;
+    }
+    ion-header{
+        background-color: map-get($colors, primary);
+    }
 }
 

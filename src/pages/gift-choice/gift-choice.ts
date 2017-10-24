@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, AlertController } from 'ionic-angular';
+import { NavParams, NavController, AlertController, ToastController } from 'ionic-angular';
 import { GiftContacts } from '../gift-contacts/gift-contacts';
 import * as moment from 'moment-timezone';
 
@@ -17,7 +17,8 @@ export class GiftChoice {
 
     constructor(public params: NavParams,
         public navCtrl: NavController,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public toastCtrl: ToastController) {
         this.user = params.get('user') || this.user;
         this.product = params.get('product');
     }
@@ -39,22 +40,30 @@ export class GiftChoice {
     }
 
     accept() {
-        let alert = this.alertCtrl.create({
-            title: 'Comenzamos?',
-            buttons: [
-                {
-                    text: 'No',
-                    role: 'cancel'
-                },
-                {
-                    text: 'Si',
-                    handler: data => {
-                        this.navCtrl.push(GiftContacts, this.params.data);
+        if (!this.user['nombre']) {
+            let toast = this.toastCtrl.create({
+                message: 'Debe colocar el nombre(Dueño de la Lista)',
+                duration: 3000
+            });
+            toast.present();
+        } else {
+            let alert = this.alertCtrl.create({
+                title: 'Comenzamos?',
+                buttons: [
+                    {
+                        text: 'No',
+                        role: 'cancel'
+                    },
+                    {
+                        text: 'Si',
+                        handler: data => {
+                            this.navCtrl.push(GiftContacts, this.params.data);
+                        }
                     }
-                }
-            ]
-        });
-        alert.present();
+                ]
+            });
+            alert.present();
+        }
     }
 
 }
