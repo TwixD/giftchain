@@ -15,7 +15,9 @@ import { Platform } from 'ionic-angular';
                                 Características
                             </ion-card-header>
                             <ion-card-content class="characteristics-content">
-                                {{ product['caracteristicas'] }}
+                                <ion-scroll scrollY="true" style="width: 100%; height: 20vh">
+                                    {{ product['caracteristicas'] }}
+                                </ion-scroll>
                             </ion-card-content>
                         </ion-card>
                     </ion-col>
@@ -25,17 +27,28 @@ import { Platform } from 'ionic-angular';
                                 Beneficios
                             </ion-card-header>
                             <ion-card-content class="benefits-content">
-                                {{ product['beneficios'] }}
+                                <ion-scroll scrollY="true" style="width: 100%; height: 20vh">
+                                    {{ product['beneficios'] }}
+                                </ion-scroll>
                             </ion-card-content>
                         </ion-card>
                     </ion-col>
                 </ion-row>
             </ion-grid>
             <ion-fab left bottom>
-                <button ion-fab color="primary" (click)="emit('prev')"><ion-icon name="arrow-round-back"></ion-icon></button>
+                <button ion-fab mini color="primary" (click)="emit('prev')">
+                    <ion-icon name="arrow-round-back"></ion-icon>
+                </button>
             </ion-fab>
             <ion-fab right bottom>
-                <button ion-fab color="primary" (click)="emit('next')"><ion-icon name="arrow-round-forward"></ion-icon></button>
+                <button ion-fab mini color="primary" (click)="emit('next')">
+                    <ion-icon name="arrow-round-forward"></ion-icon>
+                </button>
+            </ion-fab>
+            <ion-fab top right>
+                <button ion-fab mini color="primary" (click)="emit('selected')">
+                    <img src="assets/img/appicon.png"/>
+                </button>
             </ion-fab>
         </ion-slide>
     `,
@@ -44,15 +57,20 @@ import { Platform } from 'ionic-angular';
             ion-slide {
                 align-items: flex-start !important;
                 background-color: white;
+                background-image: url('assets/img/bg.png');
+                background-repeat: repeat;
             }
             .product-image{
                 height: 50vh;
             }
             .product-name{
-                font-size: 5rem;
+                font-size: 4rem;
+                font-family: inherit;
+                color: #2262A1;
             }
             .sub-cards{
                 width: 100%;
+                height: 30vh;
             }
             .characteristics-header{
                 background-color: #f6c21b;
@@ -72,6 +90,9 @@ import { Platform } from 'ionic-angular';
             .right-colum{
                 padding-left: 3px !important;
             }
+            .characteristics-content, .benefits-content{
+                font-size: 1.2rem;
+            }
         `
     ]
 })
@@ -84,21 +105,9 @@ export class productSlide {
 
     constructor(public renderer: Renderer,
         public platform: Platform) {
-
     }
 
     ngOnInit() {
-    }
-
-    ngAfterViewInit() {
-        setTimeout(() => {
-            let maxHeight: number = Math.max(this.characteristicsElement.nativeElement.offsetHeight,
-                this.benefitsElement.nativeElement.offsetHeight);
-            this.characteristicsElement.nativeElement.style.height = maxHeight + 'px';
-            this.benefitsElement.nativeElement.style.height = maxHeight + 'px';
-            this.renderer.setElementStyle(this.characteristicsElement.nativeElement, 'background-color', 'rgba(246, 194, 27, .1)');
-            this.renderer.setElementStyle(this.benefitsElement.nativeElement, 'background-color', 'rgba(255, 141, 0, .1)');
-        }, 600);
     }
 
     emit(ev: string) {

@@ -23,7 +23,6 @@ export class GiftSlider {
         public file: File,
         public alertCtrl: AlertController) {
         this.products = this.params.get('products');
-        console.log(this.products);
     }
 
     ngOnInit() {
@@ -51,7 +50,6 @@ export class GiftSlider {
                             text: 'Si',
                             handler: data => {
                                 this.params.data['product'] = event['product'];
-                                console.log(this.params.data);
                                 this.navCtrl.push( GiftChoice, this.params.data);
                             }
                         }

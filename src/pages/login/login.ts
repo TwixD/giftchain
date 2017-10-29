@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Sim } from '@ionic-native/sim';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, LoadingController } from 'ionic-angular';
 import { FirebaseAppService } from '../../providers/firebase/firebase.service';
 import { GiftSlider } from '../gift-slider/gift-slider';
 import { User } from '../../models/user.model';
@@ -19,9 +18,9 @@ export class Login {
     products: Array<Object> = [];
     navParamsData: Object = {};
 
-    constructor(public nativeStorage: NativeStorage,
-        public sim: Sim,
+    constructor(public sim: Sim,
         public firebaseAppService: FirebaseAppService,
+        public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public navCtrl: NavController,
         public transfer: FileTransfer,
@@ -96,14 +95,25 @@ export class Login {
 
     goTo(): void {
         if (this.phone) {
+            let user: User = {
+                'nombre': null,
+                'telefono': this.phone,
+                'email': null
+            };
+            let loader = this.loadingCtrl.create({
+                content: "Cargando..."
+            });
+            loader.present();
             this.firebaseAppService.query('/usuarios', 'telefono', this.phone).then((data) => {
-                let user: User = {
-                    'nombre': null,
-                    'telefono': this.phone,
-                    'email': null
-                };
-                this.navParamsData['user'] = data.length > 0 ? data[0] : user;
-                this.navCtrl.push(GiftSlider, this.navParamsData);
+                loader.dismiss().then(() => {
+                    this.navParamsData['user'] = data.length > 0 ? data[0] : user;
+                    this.navCtrl.push(GiftSlider, this.navParamsData);
+                });
+            }).catch(() => {
+                loader.dismiss().then(() => {
+                    this.navParamsData['user'] = user;
+                    this.navCtrl.push(GiftSlider, this.navParamsData);
+                });
             });
         } else {
             let alert = this.alertCtrl.create({

@@ -50,13 +50,16 @@ export class FirebaseAppService {
             let route: string = url + (createID ? `/${this.db.createPushId()}` : '');
             const itemRef = this.db.object(route);
             itemRef.set(data).then((res) => {
-                console.log(res);
                 resolve(true);
             }).catch((error) => {
                 console.error(error);
                 resolve(false);
             });
         });
+    }
+
+    getPushID(): string {
+        return this.db.createPushId();
     }
 
 }

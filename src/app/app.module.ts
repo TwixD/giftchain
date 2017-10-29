@@ -5,11 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
 import { GiftSlider } from '../pages/gift-slider/gift-slider';
 import { GiftChoice } from '../pages/gift-choice/gift-choice';
 import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
+import { GiftStatus } from '../pages/gift-status/gift-status';
 
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
 
@@ -39,11 +39,11 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     Login,
     GiftSlider,
     GiftChoice,
     GiftContacts,
+    GiftStatus,
     phoneFormatter,
     productSlide
   ],
@@ -57,11 +57,11 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     Login,
     GiftSlider,
     GiftChoice,
     GiftContacts,
+    GiftStatus,
     productSlide
   ],
   providers: [

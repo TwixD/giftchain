@@ -1,19 +1,30 @@
 gift-choice{
-    .img-div{
+    .img-card{
         text-align: center;
         vertical-align: middle;
-        background-color: black;
+        background-image: url('../../assets/img/bg.png');
+        background-repeat: repeat;
         height: 50vh;
     }
     .product-name{
-        font-size: 3.5rem;
+        font-size: 3rem;
         text-align: center;
+        color: map-get($colors, primary);
     }
-    ion-label{
-        text-align: center;
-        font-size: 1.8rem;
+    .ion-label-text{
+        color: map-get($colors, primary);
+        font-size: 1.5rem;
     }
     input{
         text-align: center;        
+    }
+    ion-content, ion-item{
+        background-color: white;
+        background-image: url('../../assets/img/bg.png');
+        background-repeat: repeat;
+    }
+    .item-inner {
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
     }
 }

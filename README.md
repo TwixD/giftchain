@@ -1,4 +1,3 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
 ## How to use this template
 
@@ -23,4 +22,10 @@ $ ionic cordova run ios
 ```
 
 Substitute ios for android if not on a Mac.
+
+## FIRMA 
+
+La llave esta en la raiz del proyecto.
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk gf-key
+pass: 12345678
 

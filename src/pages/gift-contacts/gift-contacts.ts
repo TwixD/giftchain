@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavParams, NavController, AlertController, LoadingController, Platform } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName, ContactFindOptions } from '@ionic-native/contacts';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { FirebaseAppService } from '../../providers/firebase/firebase.service';
+import { GiftStatus } from '../gift-status/gift-status';
 import * as lodash from 'lodash';
 
 @Component({
@@ -18,21 +20,23 @@ export class GiftContacts {
     termOfSearch: string = '';
     maxContactsNumber: number = 15;
     user: Object = {};
+    product: Object = {};
 
     constructor(public params: NavParams,
         public navCtrl: NavController,
         public contacts: Contacts,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
-        public firebaseAppService: FirebaseAppService) {
-            this.user = this.params.data.user;
+        public firebaseAppService: FirebaseAppService,
+        public platform: Platform,
+        public nativeStorage: NativeStorage) {
+        this.user = this.params.data.user || this.user;
+        this.product = this.params.data.product || this.product;
     }
 
     ngOnInit() {
-        console.log(this.params);
         this.selectedContactsCounter = this.maxContactsNumber;
         this.loadContacts();
-        this.setData();
     }
 
     getNumber(contact: Object) {
@@ -170,7 +174,7 @@ export class GiftContacts {
         alert.addButton({
             text: 'Okay',
             handler: data => {
-                console.log(data);
+                this.setData();
             }
         });
         alert.present();
@@ -209,8 +213,40 @@ export class GiftContacts {
     }
 
     setData() {
-        // this.firebaseAppService.insert();
+        let contacts: Object = this.prepareContacts();
+        this.user['contacts'] = contacts;
+        this.user['product'] = this.product;
+        this.user['id'] = this.user['id'] || this.firebaseAppService.getPushID();
+        this.firebaseAppService.insert(`usuarios/${this.user['id']}`, this.user, false).then(() => {
+            this.nativeStorage.setItem('user', this.user).then((res) => {
+                this.navCtrl.setRoot(GiftStatus, this.user);
+            }).catch((error) => {
+                console.error(error);
+                let alert = this.alertCtrl.create({
+                    title: 'Ops!',
+                    subTitle: 'No se pudo guardar.',
+                    buttons: ['OK']
+                });
+                alert.present();
+            });
+        }).catch(() => {
+            let alert = this.alertCtrl.create({
+                title: 'Ops!',
+                subTitle: 'Nuestros servidores están ardiendo!, por favor intente mas tarde.',
+                buttons: ['OK']
+            });
+            alert.present();
+        });
     }
+
+    prepareContacts(): Object {
+        let contacts: Object = {};
+        for (let key in this.contactList) {
+            contacts[this.firebaseAppService.getPushID()] = this.contactList[key];
+        }
+        return contacts;
+    }
+
 
     compare(a: Object, b: Object) {
         if (a['displayName'] < b['displayName'])
@@ -218,6 +254,11 @@ export class GiftContacts {
         if (a['displayName'] > b['displayName'])
             return 1;
         return 0;
+    }
+
+    getImageURL(product: Object) {
+        return this.platform.is('core') ?
+            product['imgUrl'] : (product['imgUrlLocal'] || product['imgUrl']);
     }
 
 }

@@ -1,22 +1,32 @@
-<div class="img-div" *ngIf="product">
-    <img class="product-image" src="{{ product['imgUrl'] }}" />
-</div>
-<h1 class="product-name" *ngIf="product">{{ product['nombre'] }}</h1>
-<ion-item>
-    <ion-label stacked>Dueño de la Lista</ion-label>
-    <ion-input [(ngModel)]="user['nombre']" type="text"></ion-input>
-</ion-item>
-<ion-item>
-    <ion-label stacked>Fecha de Inicio</ion-label>
-    <ion-input [(ngModel)]="user['fecha_comienzo_format']" type="text" readonly="true"></ion-input>
-</ion-item>
-<ion-item>
-    <ion-label stacked>Fecha Final del Programa</ion-label>
-    <ion-input [(ngModel)]="user['fecha_fin_format']" type="text" readonly="true"></ion-input>
-</ion-item>
-<ion-fab left bottom>
-    <button ion-fab color="primary" (click)="back()"><ion-icon name="arrow-round-back"></ion-icon></button>
-</ion-fab>
-<ion-fab right bottom>
-    <button ion-fab color="primary" (click)="accept()"><ion-icon name="arrow-round-forward"></ion-icon></button>
-</ion-fab>
+<ion-content>
+    <img class="img-card" *ngIf="product" no-margin no-padding src="{{ getImageURL(product) }}" />
+    <h2 class="product-name" *ngIf="product">{{ product['nombre'] }}</h2>
+    <ion-item>
+        <ion-label stacked text-center>
+            <span class="ion-label-text" ion-text>Dueño de la Lista</span>
+        </ion-label>
+        <ion-input [(ngModel)]="user['nombre']" type="text" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked text-center>
+            <span class="ion-label-text" ion-text>Fecha de Inicio</span>
+        </ion-label>
+        <ion-input [(ngModel)]="user['fecha_comienzo_format']" type="text" readonly="true"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked text-center>
+            <span class="ion-label-text" ion-text>Fecha Final del Programa</span>
+        </ion-label>
+        <ion-input [(ngModel)]="user['fecha_fin_format']" type="text" readonly="true"></ion-input>
+    </ion-item>
+    <ion-fab left bottom>
+        <button ion-fab mini color="primary" (click)="back()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+        </button>
+    </ion-fab>
+    <ion-fab right bottom>
+        <button ion-fab mini color="primary" (click)="accept()">
+            <ion-icon name="arrow-round-forward"></ion-icon>
+        </button>
+    </ion-fab>
+</ion-content>

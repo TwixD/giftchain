@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, AlertController, ToastController } from 'ionic-angular';
+import { NavParams, NavController, AlertController, ToastController, Platform } from 'ionic-angular';
 import { GiftContacts } from '../gift-contacts/gift-contacts';
 import * as moment from 'moment-timezone';
 
@@ -18,7 +18,8 @@ export class GiftChoice {
     constructor(public params: NavParams,
         public navCtrl: NavController,
         public alertCtrl: AlertController,
-        public toastCtrl: ToastController) {
+        public toastCtrl: ToastController,
+        public platform: Platform) {
         this.user = params.get('user') || this.user;
         this.product = params.get('product');
     }
@@ -42,7 +43,7 @@ export class GiftChoice {
     accept() {
         if (!this.user['nombre']) {
             let toast = this.toastCtrl.create({
-                message: 'Debe colocar el nombre(Dueño de la Lista)',
+                message: 'Debe colocar el Nombre(Dueño de la Lista)',
                 duration: 3000
             });
             toast.present();
@@ -64,6 +65,11 @@ export class GiftChoice {
             });
             alert.present();
         }
+    }
+
+    getImageURL(product: Object) {
+        return this.platform.is('core') ?
+            product['imgUrl'] : (product['imgUrlLocal'] || product['imgUrl']);
     }
 
 }

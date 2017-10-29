@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-card class="header-card">
+        <ion-card-content no-padding>
+            <ion-grid>
+                <ion-row *ngIf="user">
+                    <ion-col no-padding col-3 class="product-img">
+                        <img class="img-app" src="assets/img/appicon.png" />
+                    </ion-col>
+                    <ion-col col-6 text-center>
+                        <ion-row text-center class="header-row">
+                            {{ user['nombre'] }}
+                        </ion-row>
+                        <ion-row class="header-row">
+                            {{ user['fecha_comienzo_format'] }}
+                        </ion-row>
+                        <ion-row class="header-row">
+                            {{ user['fecha_fin_format'] }}
+                        </ion-row>
+                    </ion-col>
+                    <ion-col no-padding col-3 class="product-img">
+                        <img src="{{ getImageURL(product) }}">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-toolbar>
+        <ion-grid no-padding class="grid-toolbar">
+            <ion-row>
+                <ion-col col-9 class="my-guests">
+                    Mis invitados
+                </ion-col>
+                <ion-col col-3>
+                    <ion-row class="status-desc">
+                        Llamar&nbsp;
+                        <ion-icon name="radio-button-on" class="call"></ion-icon>
+                    </ion-row>
+                    <ion-row class="status-desc">
+                        Agenda&nbsp;
+                        <ion-icon name="radio-button-on" class="diary"></ion-icon>
+                    </ion-row>
+                    <ion-row class="status-desc">
+                        Visitado&nbsp;
+                        <ion-icon name="radio-button-on" class="visited"></ion-icon>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let contact of contacts">
+            {{ contact['displayName'] }}
+            <ion-note item-end>
+                {{ contact['phone'] }}
+                <ion-icon name="radio-button-on" [ngClass]="getClass(contact)"></ion-icon>
+            </ion-note>
+        </ion-item>
+    </ion-list>
+</ion-content>
