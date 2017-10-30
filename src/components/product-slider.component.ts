@@ -15,7 +15,7 @@ import { Platform } from 'ionic-angular';
                                 Características
                             </ion-card-header>
                             <ion-card-content class="characteristics-content">
-                                <ion-scroll scrollY="true" style="width: 100%; height: 20vh">
+                                <ion-scroll scrollY="true" style="width: 100%; height: 25vh">
                                     {{ product['caracteristicas'] }}
                                 </ion-scroll>
                             </ion-card-content>
@@ -27,7 +27,7 @@ import { Platform } from 'ionic-angular';
                                 Beneficios
                             </ion-card-header>
                             <ion-card-content class="benefits-content">
-                                <ion-scroll scrollY="true" style="width: 100%; height: 20vh">
+                                <ion-scroll scrollY="true" style="width: 100%; height: 25vh">
                                     {{ product['beneficios'] }}
                                 </ion-scroll>
                             </ion-card-content>
@@ -35,12 +35,12 @@ import { Platform } from 'ionic-angular';
                     </ion-col>
                 </ion-row>
             </ion-grid>
-            <ion-fab left bottom>
+            <ion-fab left middle>
                 <button ion-fab mini color="primary" (click)="emit('prev')">
                     <ion-icon name="arrow-round-back"></ion-icon>
                 </button>
             </ion-fab>
-            <ion-fab right bottom>
+            <ion-fab right middle>
                 <button ion-fab mini color="primary" (click)="emit('next')">
                     <ion-icon name="arrow-round-forward"></ion-icon>
                 </button>
@@ -64,13 +64,13 @@ import { Platform } from 'ionic-angular';
                 height: 50vh;
             }
             .product-name{
-                font-size: 4rem;
+                font-size: 2.2rem;
                 font-family: inherit;
                 color: #2262A1;
             }
             .sub-cards{
                 width: 100%;
-                height: 30vh;
+                height: 35vh;
             }
             .characteristics-header{
                 background-color: #f6c21b;
@@ -92,6 +92,8 @@ import { Platform } from 'ionic-angular';
             }
             .characteristics-content, .benefits-content{
                 font-size: 1.2rem;
+                padding: 8px;
+                margin: 0px;
             }
         `
     ]

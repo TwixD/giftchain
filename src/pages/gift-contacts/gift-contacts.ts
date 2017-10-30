@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { NavParams, NavController, AlertController, LoadingController, Platform } from 'ionic-angular';
 import { Contacts, Contact, ContactField, ContactName, ContactFindOptions } from '@ionic-native/contacts';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -29,6 +30,7 @@ export class GiftContacts {
         public alertCtrl: AlertController,
         public firebaseAppService: FirebaseAppService,
         public platform: Platform,
+        public http: HttpClient,
         public nativeStorage: NativeStorage) {
         this.user = this.params.data.user || this.user;
         this.product = this.params.data.product || this.product;
@@ -172,7 +174,7 @@ export class GiftContacts {
 
         alert.addButton('Cancelar');
         alert.addButton({
-            text: 'Okay',
+            text: 'Aceptar',
             handler: data => {
                 this.setData();
             }
@@ -213,13 +215,21 @@ export class GiftContacts {
     }
 
     setData() {
+        let loader = this.loadingCtrl.create({
+            content: "Cargando..."
+        });
+        loader.present();
         let contacts: Object = this.prepareContacts();
         this.user['contacts'] = contacts;
         this.user['product'] = this.product;
         this.user['id'] = this.user['id'] || this.firebaseAppService.getPushID();
         this.firebaseAppService.insert(`usuarios/${this.user['id']}`, this.user, false).then(() => {
             this.nativeStorage.setItem('user', this.user).then((res) => {
-                this.navCtrl.setRoot(GiftStatus, this.user);
+                this.alertServer().then(() => {
+                    loader.dismiss().then(() => {
+                        this.navCtrl.setRoot(GiftStatus, this.user);
+                    });
+                });
             }).catch((error) => {
                 console.error(error);
                 let alert = this.alertCtrl.create({
@@ -227,7 +237,9 @@ export class GiftContacts {
                     subTitle: 'No se pudo guardar.',
                     buttons: ['OK']
                 });
-                alert.present();
+                loader.dismiss().then(() => {
+                    alert.present();
+                });
             });
         }).catch(() => {
             let alert = this.alertCtrl.create({
@@ -235,7 +247,34 @@ export class GiftContacts {
                 subTitle: 'Nuestros servidores están ardiendo!, por favor intente mas tarde.',
                 buttons: ['OK']
             });
-            alert.present();
+            loader.dismiss().then(() => {
+                alert.present();
+            });
+        });
+    }
+
+    alertServer(): Promise<boolean> {
+        return new Promise((resolve) => {
+            try {
+                let settings: Object = 'settings' in this.params.data ?
+                    this.params.data['settings'] : {};
+                if ('url_alert' in settings) {
+                    let body: Object = { id_usuario: this.user['id'] };
+                    this.http.post(settings['url_alert'], body).subscribe(data => {
+                        console.log(`[GiftContacts] [alertServer] POST SUCCESS`, data);
+                        resolve(true);
+                    }, (error) => {
+                        console.error(`[GiftContacts] [alertServer] POST ERROR `, error);
+                        resolve(false);
+                    });
+                } else {
+                    console.error(`[GiftContacts] [alertServer] There is no configuration`);
+                    resolve(false);
+                }
+            } catch (error) {
+                console.error(`[GiftContacts] [alertServer]`, error);
+                resolve(false);
+            }
         });
     }
 
@@ -246,7 +285,6 @@ export class GiftContacts {
         }
         return contacts;
     }
-
 
     compare(a: Object, b: Object) {
         if (a['displayName'] < b['displayName'])

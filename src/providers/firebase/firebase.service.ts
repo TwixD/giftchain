@@ -10,17 +10,27 @@ export class FirebaseAppService {
         public afAuth: AngularFireAuth) {
     }
 
-    query(url: string, prop: string, equalValue: any): Promise<any> {
+    query(url: string, prop: string, equalValue: any, retriveObject: boolean = false): Promise<any> {
         return new Promise((resolve) => {
             try {
-                this.db.list(url,
-                    (ref) => ref.orderByChild(prop).equalTo(equalValue)
-                ).valueChanges().subscribe((data) => {
-                    resolve(data);
-                }, (error) => {
-                    console.error(`[FirebaseService] [query]`, error);
-                    resolve(null);
-                });
+                if (retriveObject) {
+                    this.db.object(url).valueChanges().subscribe((data) => {
+                        resolve(data);
+                    }, (error) => {
+                        console.error(`[FirebaseService] [query]`, error);
+                        resolve(null);
+                    });
+                } else {
+                    this.db.list(url, (ref) =>
+                        prop && equalValue ?
+                            ref.orderByChild(prop).equalTo(equalValue) : ref
+                    ).valueChanges().subscribe((data) => {
+                        resolve(data);
+                    }, (error) => {
+                        console.error(`[FirebaseService] [query]`, error);
+                        resolve(null);
+                    });
+                }
             } catch (error) {
                 console.error(`[FirebaseService] [query]`, error);
                 resolve(null);

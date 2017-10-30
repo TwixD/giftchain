@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-import { Sim } from '@ionic-native/sim';
-import { AlertController, NavController, LoadingController } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AlertController, NavController, LoadingController, Platform } from 'ionic-angular';
 import { FirebaseAppService } from '../../providers/firebase/firebase.service';
 import { GiftSlider } from '../gift-slider/gift-slider';
 import { User } from '../../models/user.model';
@@ -18,36 +18,25 @@ export class Login {
     products: Array<Object> = [];
     navParamsData: Object = {};
 
-    constructor(public sim: Sim,
-        public firebaseAppService: FirebaseAppService,
+    constructor(public firebaseAppService: FirebaseAppService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public navCtrl: NavController,
         public transfer: FileTransfer,
+        public platform: Platform,
+        public keyboard: Keyboard,
         public file: File) {
     }
 
     ngOnInit() {
-        this.loadSimInfo();
         this.loadProducts();
+        this.getSettings();
     }
 
-    loadSimInfo() {
-        this.sim.hasReadPermission().then((info) => {
-            this.requestPermission(info).then((res) => {
-                if (res) {
-                    this.sim.getSimInfo().then(
-                        (simInfo) => {
-                            if (simInfo['phoneNumber']) {
-                                this.phone = simInfo['phoneNumber'];
-                            }
-                        },
-                        (err) => console.log('Unable to get sim info: ', err));
-                }
-            });
-        }).catch((error) => {
-            console.error(error);
-        });
+    getSettings() {
+        this.firebaseAppService.query('/settings', null, null, true).then((data) => {
+            this.navParamsData['settings'] = data;
+        })
     }
 
     loadProducts() {
@@ -80,19 +69,6 @@ export class Login {
         });
     }
 
-    requestPermission(hasPermission: boolean): Promise<boolean> {
-        return new Promise((resolve) => {
-            if (!hasPermission) {
-                this.sim.requestReadPermission().then(
-                    () => resolve(true),
-                    () => resolve(false)
-                );
-            } else {
-                resolve(hasPermission);
-            }
-        });
-    }
-
     goTo(): void {
         if (this.phone) {
             let user: User = {
@@ -103,16 +79,24 @@ export class Login {
             let loader = this.loadingCtrl.create({
                 content: "Cargando..."
             });
+            let alertNotAllow = this.alertCtrl.create({
+                title: 'Ups!',
+                subTitle: 'Su número telefónico no esta participando',
+                buttons: ['OK']
+            });
             loader.present();
             this.firebaseAppService.query('/usuarios', 'telefono', this.phone).then((data) => {
                 loader.dismiss().then(() => {
-                    this.navParamsData['user'] = data.length > 0 ? data[0] : user;
-                    this.navCtrl.push(GiftSlider, this.navParamsData);
+                    if (data.length > 0) {
+                        this.navParamsData['user'] = data[0];
+                        this.navCtrl.push(GiftSlider, this.navParamsData);
+                    } else {
+                        alertNotAllow.present();
+                    }
                 });
             }).catch(() => {
                 loader.dismiss().then(() => {
-                    this.navParamsData['user'] = user;
-                    this.navCtrl.push(GiftSlider, this.navParamsData);
+                    alertNotAllow.present();
                 });
             });
         } else {
@@ -123,6 +107,18 @@ export class Login {
             });
             alert.present();
         }
+    }
+
+    ionViewDidEnter() {
+        this.platform.ready().then(() => {
+            this.keyboard.disableScroll(true);
+        });
+    }
+
+    ionViewWillLeave() {
+        this.platform.ready().then(() => {
+            this.keyboard.disableScroll(false);
+        });
     }
 
 }

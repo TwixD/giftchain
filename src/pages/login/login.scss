@@ -41,4 +41,8 @@ login-page {
           background-color: rgb(220, 220, 220);
         }
     }
+    ion-content, ion-item{
+      background-image: url('../../assets/img/bg.png');
+      background-repeat: repeat;
+    }
 }

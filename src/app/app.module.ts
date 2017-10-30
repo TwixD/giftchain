@@ -3,6 +3,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Keyboard } from '@ionic-native/keyboard';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
@@ -25,7 +27,6 @@ import { productSlide } from '../components/product-slider.component';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { NativeStorage } from '@ionic-native/native-storage';
-import { Sim } from '@ionic-native/sim';
 import { Contacts } from '@ionic-native/contacts';
 
 export const firebaseConfig = {
@@ -49,7 +50,8 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    IonicModule.forRoot(MyApp, { scrollAssist: false, autoFocusAssist: false }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
@@ -66,13 +68,13 @@ export const firebaseConfig = {
   ],
   providers: [
     StatusBar,
+    Keyboard,
     SplashScreen,
     AngularFireDatabase,
     FirebaseAppService,
     File,
     FileTransfer,
     NativeStorage,
-    Sim,
     Contacts,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
