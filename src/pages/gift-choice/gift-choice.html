@@ -5,26 +5,40 @@
         <ion-label stacked text-center>
             <span class="ion-label-text" ion-text>Dueño de la Lista</span>
         </ion-label>
-        <ion-input [(ngModel)]="user['nombre']" type="text" placeholder="Nombre"></ion-input>
+        <ion-input [(ngModel)]="user['nombre']" type="text" placeholder="Nombre" class="input-font-mani"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label stacked text-center>
-            <span class="ion-label-text" ion-text>Fecha de Inicio</span>
+            <span class="ion-label-text" ion-text>Teléfono</span>
         </ion-label>
-        <ion-input [(ngModel)]="user['fecha_comienzo_format']" type="text" readonly="true"></ion-input>
+        <ion-input [(ngModel)]="user['telefono']" type="number" placeholder="(123) 456 789 1011" class="input-font-mani"></ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label stacked text-center>
-            <span class="ion-label-text" ion-text>Fecha Final del Programa</span>
-        </ion-label>
-        <ion-input [(ngModel)]="user['fecha_fin_format']" type="text" readonly="true"></ion-input>
-    </ion-item>
-    <ion-fab left bottom>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label stacked text-center>
+                    <span class="ion-label-text" ion-text>Fecha de Inicio</span>
+                </ion-label>
+                <ion-input [(ngModel)]="user['fecha_comienzo_format']" type="text" readonly="true"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label stacked text-center>
+                    <span class="ion-label-text" ion-text>Fecha Final</span>
+                </ion-label>
+                <ion-input [(ngModel)]="user['fecha_fin_format']" type="text" readonly="true"></ion-input>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+
+    <ion-fab left middle>
         <button ion-fab mini color="primary" (click)="back()">
             <ion-icon name="arrow-round-back"></ion-icon>
         </button>
     </ion-fab>
-    <ion-fab right bottom>
+    <ion-fab right middle>
         <button ion-fab mini color="primary" (click)="accept()">
             <ion-icon name="arrow-round-forward"></ion-icon>
         </button>

@@ -12,6 +12,8 @@ import { GiftSlider } from '../pages/gift-slider/gift-slider';
 import { GiftChoice } from '../pages/gift-choice/gift-choice';
 import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
 import { GiftStatus } from '../pages/gift-status/gift-status';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { GiftDescPage } from '../pages/gift-desc/gift-desc';
 
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
 
@@ -45,6 +47,8 @@ export const firebaseConfig = {
     GiftChoice,
     GiftContacts,
     GiftStatus,
+    WelcomePage,
+    GiftDescPage,
     phoneFormatter,
     productSlide
   ],
@@ -64,6 +68,8 @@ export const firebaseConfig = {
     GiftChoice,
     GiftContacts,
     GiftStatus,
+    WelcomePage,
+    GiftDescPage,
     productSlide
   ],
   providers: [

@@ -3,6 +3,8 @@ gift-contacts{
         background-color: map-get($colors, primary);
         height: 100%;
         width: 100%;
+        max-width: 100px;
+        max-height: 100px;
     }
     .contact-img{
         font-size: 4.9rem;
@@ -26,6 +28,17 @@ gift-contacts{
     }
     ion-header{
         background-color: map-get($colors, primary);
+    }
+    .user-header{
+        padding-left: 7px;
+        padding-top: 3px;
+    }
+    .icons{
+        margin-right: 4px;
+        margin-top: 3px;
+    }
+    .item-icon-end{
+        font-size: 4.9rem;
     }
 }
 

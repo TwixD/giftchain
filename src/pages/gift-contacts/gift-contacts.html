@@ -1,21 +1,28 @@
 <ion-header>
     <ion-card class="header-card">
         <ion-card-content no-padding>
-            <ion-grid>
-                <ion-row *ngIf="user">
-                    <ion-col col-9>
-                        <ion-row>
-                            {{ user['nombre'] }}
-                        </ion-row>
-                        <ion-row>
-                            {{ user['fecha_comienzo_format'] }}
-                        </ion-row>
-                        <ion-row>
-                            {{ user['fecha_fin_format'] }}
-                        </ion-row>
+            <ion-grid no-padding no-margin fixed>
+                <ion-row *ngIf="user" responsive-lg>
+                    <ion-col>
+                        <div class="user-header">
+                            <ion-row>
+                                <ion-icon class="icons" name="contact" item-start></ion-icon>
+                                {{ user['nombre'] }}
+                            </ion-row>
+                            <ion-row>
+                                <ion-icon class="icons" name="time" item-start></ion-icon>
+                                {{ user['fecha_comienzo_format'] }}
+                            </ion-row>
+                            <ion-row>
+                                <ion-icon class="icons" name="calendar" item-start></ion-icon>
+                                {{ user['fecha_fin_format'] }}
+                            </ion-row>
+                        </div>
                     </ion-col>
                     <ion-col no-padding col-3 class="product-img">
-                        <img style="" src="{{ getImageURL(product) }}">
+                        <div>
+                            <img src="{{ getImageURL(product) }}">
+                        </div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -36,8 +43,8 @@
             <h2 (tap)="tapEvent(contact)" style="font-weight: bold;">{{ contact['displayName'] }}</h2>
             <h3 (tap)="changePhone(contact)">
                 <ion-icon name="call" color="primary"></ion-icon> {{ contact['phone'] || 'Sin número' }}</h3>
-            <ion-icon *ngIf="!contact['selected']" name="add-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
-            <ion-icon *ngIf="contact['selected']" name="remove-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
+            <ion-icon class="item-icon-end" *ngIf="!contact['selected']" name="add-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
+            <ion-icon class="item-icon-end" *ngIf="contact['selected']" name="remove-circle" item-right (tap)="tapEvent(contact)"></ion-icon>
         </ion-item>
     </ion-list>
     <ion-fab top right edge>

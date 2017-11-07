@@ -22,6 +22,7 @@ export class GiftContacts {
     maxContactsNumber: number = 15;
     user: Object = {};
     product: Object = {};
+    settings: Object = {};
 
     constructor(public params: NavParams,
         public navCtrl: NavController,
@@ -34,6 +35,7 @@ export class GiftContacts {
         public nativeStorage: NativeStorage) {
         this.user = this.params.data.user || this.user;
         this.product = this.params.data.product || this.product;
+        this.settings = this.params.data.settings || this.settings;
     }
 
     ngOnInit() {
@@ -221,67 +223,93 @@ export class GiftContacts {
         loader.present();
         let contacts: Object = this.prepareContacts();
         this.user['contacts'] = contacts;
-        this.user['product'] = this.product;
-        this.user['id'] = this.user['id'] || this.firebaseAppService.getPushID();
-        this.firebaseAppService.insert(`usuarios/${this.user['id']}`, this.user, false).then(() => {
-            this.nativeStorage.setItem('user', this.user).then((res) => {
-                this.alertServer().then(() => {
-                    loader.dismiss().then(() => {
-                        this.navCtrl.setRoot(GiftStatus, this.user);
-                    });
-                });
-            }).catch((error) => {
-                console.error(error);
-                let alert = this.alertCtrl.create({
-                    title: 'Ops!',
-                    subTitle: 'No se pudo guardar.',
-                    buttons: ['OK']
-                });
-                loader.dismiss().then(() => {
-                    alert.present();
-                });
-            });
-        }).catch(() => {
-            let alert = this.alertCtrl.create({
-                title: 'Ops!',
-                subTitle: 'Nuestros servidores están ardiendo!, por favor intente mas tarde.',
-                buttons: ['OK']
-            });
+        this.user['product'] = this.product['id'] || null;
+        this.save().then((res) => {
             loader.dismiss().then(() => {
-                alert.present();
-            });
-        });
-    }
-
-    alertServer(): Promise<boolean> {
-        return new Promise((resolve) => {
-            try {
-                let settings: Object = 'settings' in this.params.data ?
-                    this.params.data['settings'] : {};
-                if ('url_alert' in settings) {
-                    let body: Object = { id_usuario: this.user['id'] };
-                    this.http.post(settings['url_alert'], body).subscribe(data => {
-                        console.log(`[GiftContacts] [alertServer] POST SUCCESS`, data);
-                        resolve(true);
-                    }, (error) => {
-                        console.error(`[GiftContacts] [alertServer] POST ERROR `, error);
-                        resolve(false);
+                if (res) {
+                    this.nativeStorage.setItem('user', this.user).then((res) => {
+                        this.navCtrl.setRoot(GiftStatus, {
+                            'settings': this.settings,
+                            'user': this.user,
+                            'products': this.params.get('products')
+                        });
+                    }).catch((error) => {
+                        console.error(`[GiftContacts] [setData]`, error);
+                        let alert = this.alertCtrl.create({
+                            title: 'Ops!',
+                            subTitle: 'No se pudo guardar.',
+                            buttons: ['OK']
+                        });
+                        loader.dismiss().then(() => {
+                            alert.present();
+                        });
                     });
                 } else {
-                    console.error(`[GiftContacts] [alertServer] There is no configuration`);
-                    resolve(false);
+                    let alert = this.alertCtrl.create({
+                        title: 'Ops!',
+                        subTitle: 'Nuestros servidores están ardiendo!, por favor intente mas tarde.',
+                        buttons: ['OK']
+                    });
+                    alert.present();
                 }
+            });
+        });
+
+        // this.user['id'] = this.user['id'] || this.firebaseAppService.getPushID();
+        // this.firebaseAppService.insert(`usuarios/${this.user['id']}`, this.user, false).then(() => {
+        //     this.nativeStorage.setItem('user', this.user).then((res) => {
+        //         this.alertServer().then(() => {
+        //             loader.dismiss().then(() => {
+        //                 this.navCtrl.setRoot(GiftStatus, this.user);
+        //             });
+        //         });
+        //     }).catch((error) => {
+        //         console.error(error);
+        //         let alert = this.alertCtrl.create({
+        //             title: 'Ops!',
+        //             subTitle: 'No se pudo guardar.',
+        //             buttons: ['OK']
+        //         });
+        //         loader.dismiss().then(() => {
+        //             alert.present();
+        //         });
+        //     });
+        // }).catch(() => {
+        //     let alert = this.alertCtrl.create({
+        //         title: 'Ops!',
+        //         subTitle: 'Nuestros servidores están ardiendo!, por favor intente mas tarde.',
+        //         buttons: ['OK']
+        //     });
+        //     loader.dismiss().then(() => {
+        //         alert.present();
+        //     });
+        // });
+    }
+
+    save(): Promise<boolean> {
+        return new Promise((resolve) => {
+            try {
+                let body: Object = this.user;
+                this.http.post(this.settings['save'], body).subscribe((data) => {
+                    console.log(`[GiftContacts] [save] POST SUCCESS`, data);
+                    resolve(true);
+                }, (error) => {
+                    console.error(`[GiftContacts] [save] POST ERROR `, error);
+                    resolve(false);
+                });
             } catch (error) {
-                console.error(`[GiftContacts] [alertServer]`, error);
+                console.error(`[GiftContacts] [save]`, error);
                 resolve(false);
             }
         });
     }
 
-    prepareContacts(): Object {
-        let contacts: Object = {};
+    prepareContacts(): Array<Object> {
+        let contacts: Array<Object> = [];
         for (let key in this.contactList) {
-            contacts[this.firebaseAppService.getPushID()] = this.contactList[key];
+            if (this.contactList[key]['phone'] && this.contactList[key]['displayName']) {
+                contacts.push(this.contactList[key]);
+            }
         }
         return contacts;
     }

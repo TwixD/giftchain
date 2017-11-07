@@ -1,0 +1,58 @@
+gift-desc-page{
+    .product-image{
+        height: 50vh;
+        width: 100%;
+    }
+    .product-name{
+        font-size: 1.5rem;
+        font-family: inherit;
+        text-align: center;
+        color: #2262A1;
+    }
+    .sub-cards{
+        width: 100%;
+        height: 35vh;
+    }
+    .characteristics-header{
+        background-color: #f6c21b;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .benefits-header{
+        background-color: #ff8d00;
+        color: white;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .left-colum{
+        padding-right: 3px !important;
+    }
+    .right-colum{
+        padding-left: 3px !important;
+    }
+    .characteristics-content, .benefits-content{
+        font-size: 1.1rem;
+        padding: 8px;
+        margin: 0px;
+    }
+    .characteristics-content{
+        display: flex;
+        align-items: center;
+        background-color: #FFF3E3;
+        border-right: 1px solid white;
+        border-bottom: 2px solid white;
+    }
+    .benefits-content{
+        background-color: #FFECE4;
+        border-left: 1px solid white;
+        border-bottom: 2px solid white;
+    }
+    .product-desc-card{
+        height: 35vh;
+    }
+    .legend-card-content{
+        background: linear-gradient(to left, #FFECE4 50%, #FFF3E3 50%);
+    }
+    
+}

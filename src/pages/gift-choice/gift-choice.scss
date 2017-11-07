@@ -5,15 +5,17 @@ gift-choice{
         background-image: url('../../assets/img/bg.png');
         background-repeat: repeat;
         height: 50vh;
+        width: 100%;
     }
     .product-name{
-        font-size: 3rem;
+        font-size: 1.5rem;
         text-align: center;
         color: map-get($colors, primary);
+        margin-top: 24px;
     }
     .ion-label-text{
         color: map-get($colors, primary);
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     input{
         text-align: center;        
@@ -26,5 +28,12 @@ gift-choice{
     .item-inner {
         border-bottom-color: transparent !important;
         box-shadow: none !important;
+    }
+    ion-input{
+        font-size: 1.3rem;
+    }
+    .input-font-mani{
+        font-weight: bold;
+        font-size: 1.5rem;
     }
 }
