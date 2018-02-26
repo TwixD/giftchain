@@ -1,10 +1,15 @@
-gift-contacts{
+gift-contacts{ 
+    .header-items-col{
+        line-height: 70px;
+        ion-list{
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
     .product-img{
         background-color: map-get($colors, primary);
-        height: 100%;
-        width: 100%;
-        max-width: 100px;
-        max-height: 100px;
+        height: 70px !important;
+        width: 70px !important;
     }
     .contact-img{
         font-size: 4.9rem;
@@ -33,12 +38,33 @@ gift-contacts{
         padding-left: 7px;
         padding-top: 3px;
     }
+    .header-items{
+        color: white;
+        font-size: 1.3rem;
+        background: map-get($colors, primary);
+        max-height: 20px !important;
+        min-height: 20px !important;
+        .item-inner{
+            margin: 0px !important;
+        }
+        ion-icon{
+            font-size: 1.5rem;
+            margin-top: 22px !important;
+        }
+    }
+    .header-user-name{
+        font-weight: bold;
+        font-size: 1.6rem;
+    }
     .icons{
         margin-right: 4px;
         margin-top: 3px;
     }
     .item-icon-end{
         font-size: 4.9rem;
+    }
+    .badge-relationship{
+        font-size: 1.1rem;
     }
 }
 

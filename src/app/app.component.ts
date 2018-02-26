@@ -6,12 +6,11 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
-
 import { Login } from '../pages/login/login';
 import { GiftStatus } from '../pages/gift-status/gift-status';
 import { WelcomePage } from '../pages/welcome/welcome';
-
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
+import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
 
 @Component({
   templateUrl: 'app.html'
@@ -40,6 +39,7 @@ export class MyApp {
   }
 
   route() {
+    // this.nav.setRoot(GiftContacts, {});
     this.loadProducts().then(() => {
       this.loadSettings().then(() => {
         this.loadPreviousData().then((res) => {

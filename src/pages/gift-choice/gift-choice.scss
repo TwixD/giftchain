@@ -30,10 +30,14 @@ gift-choice{
         box-shadow: none !important;
     }
     ion-input{
-        font-size: 1.3rem;
+        font-family: sans-serif;
+        font-size: 1.7rem;
     }
-    .input-font-mani{
+    ion-label{
         font-weight: bold;
-        font-size: 1.5rem;
+    }
+    .item-inner, ion-item {
+        border-bottom-color: transparent !important;
+        box-shadow: none !important;
     }
 }

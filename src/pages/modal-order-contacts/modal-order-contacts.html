@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary" text-center>
+    <span class="title" text-wrap>Es hora de darle prioridad a sus contactos!</span>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-group reorder="true" (ionItemReorder)="reorderItems($event)">
+      <ion-item *ngFor="let contact of contacts; let i = index">
+        <span ion-text class="number-count">{{ getIndex(i) }}</span>
+        <span class="contact-display-name" ion-text color="primary">{{ contact['displayName'] }}</span>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="ok()">
+      <ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

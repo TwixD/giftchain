@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Keyboard } from '@ionic-native/keyboard';
 import { HttpClientModule } from '@angular/common/http';
-
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { GiftSlider } from '../pages/gift-slider/gift-slider';
@@ -14,18 +13,14 @@ import { GiftContacts } from '../pages/gift-contacts/gift-contacts';
 import { GiftStatus } from '../pages/gift-status/gift-status';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { GiftDescPage } from '../pages/gift-desc/gift-desc';
-
+import { ModalOrderContactsPage } from '../pages/modal-order-contacts/modal-order-contacts';
+import { ModalRelationshipsPage } from '../pages/modal-relationships/modal-relationships';
 import { FirebaseAppService } from '../providers/firebase/firebase.service';
-
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
 import { phoneFormatter } from '../directives/phone.directive';
-
 import { productSlide } from '../components/product-slider.component';
-
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -49,6 +44,8 @@ export const firebaseConfig = {
     GiftStatus,
     WelcomePage,
     GiftDescPage,
+    ModalOrderContactsPage,
+    ModalRelationshipsPage,
     phoneFormatter,
     productSlide
   ],
@@ -70,6 +67,8 @@ export const firebaseConfig = {
     GiftStatus,
     WelcomePage,
     GiftDescPage,
+    ModalOrderContactsPage,
+    ModalRelationshipsPage,
     productSlide
   ],
   providers: [

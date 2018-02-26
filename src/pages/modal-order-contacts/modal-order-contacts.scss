@@ -1,0 +1,21 @@
+page-modal-order-contacts {
+    .first{
+        background-color: #FFF9C4;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+    }
+    .title{
+        font-size: 2.3rem;
+        color: white;
+        font-weight: bold;
+    }
+    .number-count{
+        color: map-get($colors, secondary);
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    .contact-display-name{
+        font-weight: bold;
+    }
+}

@@ -1,48 +1,47 @@
 <ion-content scroll="false">
-    <div class="splash-bg"></div>
-    <div class="splash-info">
-        <div class="splash-logo"></div>
-        <div class="splash-intro">
-            <span color="primary" ion-text>Bienvenido a GiftChain</span>
-        </div>
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <div class="splash-intro">
+      <span color="primary" ion-text>Bienvenido a GiftChain</span>
     </div>
-    <div class="product-grid">
+  </div>
+  <div class="product-grid">
+    <ion-row>
+      <ion-grid>
         <ion-row>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-6>
-                        <ion-card no-margin class="perfect-grid" style="float: right;" *ngIf="showCard(0)" (click)="selectProduct(products[0])">
-                            <img class="product-img" [src]="getImageURL(products[0])" />
-                        </ion-card>
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-card no-margin class="perfect-grid" *ngIf="showCard(1)" (click)="selectProduct(products[1])">
-                            <img class="product-img" [src]="getImageURL(products[1])" />
-                        </ion-card>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col col-6>
-                        <ion-card no-margin class="perfect-grid" style="float: right;" *ngIf="showCard(2)" (click)="selectProduct(products[2])">
-                            <img class="product-img" [src]="getImageURL(products[2])" />
-                        </ion-card>
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-card no-margin class="perfect-grid" *ngIf="showCard(3)" (click)="selectProduct(products[3])">
-                            <img class="product-img" [src]="getImageURL(products[3])" />
-                        </ion-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+          <ion-col col-6>
+            <ion-card no-margin class="perfect-grid" style="float: right;" *ngIf="showCard(0)" (click)="selectProduct(products[0])">
+              <img class="product-img" [src]="getImageURL(products[0])" />
+            </ion-card>
+          </ion-col>
+          <ion-col col-6>
+            <ion-card no-margin class="perfect-grid" *ngIf="showCard(1)" (click)="selectProduct(products[1])">
+              <img class="product-img" [src]="getImageURL(products[1])" />
+            </ion-card>
+          </ion-col>
         </ion-row>
-    </div>
-
+        <ion-row>
+          <ion-col col-6>
+            <ion-card no-margin class="perfect-grid" style="float: right;" *ngIf="showCard(2)" (click)="selectProduct(products[2])">
+              <img class="product-img" [src]="getImageURL(products[2])" />
+            </ion-card>
+          </ion-col>
+          <ion-col col-6>
+            <ion-card no-margin class="perfect-grid" *ngIf="showCard(3)" (click)="selectProduct(products[3])">
+              <img class="product-img" [src]="getImageURL(products[3])" />
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </div>
 </ion-content>
 
 <ion-footer no-border>
-    <ion-toolbar text-center color="white">
-        <ion-title>
-            <span color="primary" ion-text style="font-size: 2.5rem;">Selecciona tu regalo</span>
-        </ion-title>
-    </ion-toolbar>
+  <ion-toolbar text-center color="white">
+    <ion-title>
+      <span color="primary" ion-text style="font-size: 2.5rem;">Selecciona tu regalo</span>
+    </ion-title>
+  </ion-toolbar>
 </ion-footer>

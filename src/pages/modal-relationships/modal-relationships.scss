@@ -1,0 +1,49 @@
+page-modal-relationships {
+    ion-content{
+        background:rgba(0,0,0,0.5) !important;
+    }
+    ion-card{
+        width: 87vw !important;
+    }
+    ion-scroll{
+        height: 100vh !important;
+    }
+    // .scroll-content{
+    //     display: table !important;
+    //     height: 100vh !important;
+    // }
+    // ion-list{
+    //     vertical-align: middle;
+    //     display: table-cell;
+    // }
+    .contact-display-name{
+        text-align: center;
+        font-size: 2.1rem;
+        font-weight: bold;
+        background: rgba(0,0,0,0);
+        color: white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .rel-number{
+        font-weight: bold;
+        font-size: 6rem;
+    }
+    .rel-label{
+        font-size: 3rem;
+    }
+    .rel-desc{
+        font-size: 1rem;
+    }
+    .relationship-desc{
+        min-height: 17px;
+        height: 17px;
+        ion-label{
+            font-size: 1.1rem !important;
+            min-height: 17px;
+            height: 17px;
+        }
+        ion-radio{
+            margin: 0px !important;
+        }
+    }
+}

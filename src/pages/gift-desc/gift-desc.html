@@ -1,62 +1,62 @@
 <ion-content>
-    <img class="product-image" src="{{ getImageURL(product) }}" (click)="next()" />
-    <h1 class="product-name">{{ product['nombre'] }}</h1>
-    <ion-card class="product-desc-card">
+  <img class="product-image" src="{{ getImageURL(product) }}" (click)="next()" />
+  <h1 class="product-name">{{ product['nombre'] }}</h1>
+  <ion-card class="product-desc-card">
 
-        <ion-card-header text-uppercase text-center no-padding>
-            <ion-grid no-padding>
-                <ion-row>
-                    <ion-col col-6 class="left-colum" class="characteristics-header">
-                        Características
-                    </ion-col>
-                    <ion-col col-6 class="right-colum" class="benefits-header">
-                        Beneficios
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-header>
+    <ion-card-header text-uppercase text-center no-padding>
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col col-6 class="left-colum" class="characteristics-header">
+            Características
+          </ion-col>
+          <ion-col col-6 class="right-colum" class="benefits-header">
+            Beneficios
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
 
-        <ion-card-content no-padding class="legend-card-content" *ngIf="showArray(product['caracteristicas'])">
-            <ion-scroll scrollY="true" style="width: 100%; height: 32vh">
-                <ion-row *ngFor="let characteristic of product['caracteristicas'];let i = index" class="desc-row">
-                    <ion-col col-6 class="characteristics-content" text-justify>
-                        <span>{{ characteristic }}</span>
-                    </ion-col>
-                    <ion-col col-6 class="benefits-content" text-justify>
-                        <span *ngIf="showBenefit(i)">{{ product['beneficios'][i] }}</span>
-                    </ion-col>
-                </ion-row>
-            </ion-scroll>
-        </ion-card-content>
+    <ion-card-content no-padding class="legend-card-content" *ngIf="showArray(product['caracteristicas'])">
+      <ion-scroll scrollY="true" style="width: 100%; height: 32vh">
+        <ion-row *ngFor="let characteristic of product['caracteristicas'];let i = index" class="desc-row">
+          <ion-col col-6 class="characteristics-content" text-justify>
+            <span>{{ characteristic }}</span>
+          </ion-col>
+          <ion-col col-6 class="benefits-content" text-justify>
+            <span *ngIf="showBenefit(i)">{{ product['beneficios'][i] }}</span>
+          </ion-col>
+        </ion-row>
+      </ion-scroll>
+    </ion-card-content>
 
-        <ion-card-content no-padding class="legend-card-content" *ngIf="!showArray(product['caracteristicas'])">
-            <ion-scroll scrollY="true" style="width: 100%; height: 32vh">
-                <ion-row class="desc-row">
-                    <ion-col col-6 class="characteristics-content">
-                        <span>{{ product['caracteristicas'] }}</span>
-                    </ion-col>
-                    <ion-col col-6 class="benefits-content">
-                        <span>{{ product['beneficios'] }}</span>
-                    </ion-col>
-                </ion-row>
-            </ion-scroll>
-        </ion-card-content>
+    <ion-card-content no-padding class="legend-card-content" *ngIf="!showArray(product['caracteristicas'])">
+      <ion-scroll scrollY="true" style="width: 100%; height: 32vh">
+        <ion-row class="desc-row">
+          <ion-col col-6 class="characteristics-content">
+            <span>{{ product['caracteristicas'] }}</span>
+          </ion-col>
+          <ion-col col-6 class="benefits-content">
+            <span>{{ product['beneficios'] }}</span>
+          </ion-col>
+        </ion-row>
+      </ion-scroll>
+    </ion-card-content>
 
-    </ion-card>
+  </ion-card>
 
-    <ion-fab left middle>
-        <button ion-fab mini color="primary" (click)="back()">
-            <ion-icon name="arrow-round-back"></ion-icon>
-        </button>
-    </ion-fab>
-    <ion-fab right middle>
-        <button ion-fab mini color="primary" (click)="next()">
-            <ion-icon name="arrow-round-forward"></ion-icon>
-        </button>
-    </ion-fab>
-    <ion-fab top right>
-        <button ion-fab mini color="primary" (click)="next()">
-            <img src="assets/img/appicon.png" />
-        </button>
-    </ion-fab>
+  <ion-fab left middle>
+    <button ion-fab mini color="primary" (click)="back()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab right middle>
+    <button ion-fab mini color="primary" (click)="next()">
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab top right>
+    <button ion-fab mini color="primary" (click)="next()">
+      <img src="assets/img/appicon.png" />
+    </button>
+  </ion-fab>
 </ion-content>
