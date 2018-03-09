@@ -83,6 +83,7 @@
     <allow-navigation href="http://192.168.6.37:8100" />
     <allow-navigation href="http://192.168.0.17:8100" />
     <allow-navigation href="http://192.168.2.107:8100" />
+    <allow-navigation href="http://192.168.0.14:8100" />
     <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.3" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
@@ -96,5 +97,4 @@
     <plugin name="cordova-plugin-nativestorage" spec="^2.3.0" />
     <plugin name="cordova-plugin-contacts" spec="^2.3.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <allow-navigation href="http://192.168.0.14:8100" />
 </widget>
